@@ -14,6 +14,9 @@ from dateutil.parser import parse as parse_ts
 
 
 class Storage(BaseStorage):
+    @property
+    def is_auto_webp(self):
+        return self.context.config.AUTO_WEBP and self.context.request.accepts_webp
 
     def __init__(self, context):
         BaseStorage.__init__(self, context)
@@ -49,8 +52,11 @@ class Storage(BaseStorage):
 
     def normalize_path(self, path):
         digest = hashlib.sha1(path.encode('utf-8')).hexdigest()
-        return "thumbor/result_storage/"+digest
-
+        if self.is_auto_webp:
+             return "thumbor/result_storage/webp/"+digest
+        else:
+             return "thumbor/result_storage/"+digest
+        
     def is_expired(self, key):
         if key:
             timediff = datetime.now() - self.utc_to_local(parse_ts(key.last_modified))

@@ -11,6 +11,7 @@ setup(
 	zip_safe = False,
 	include_package_data = True,
 	packages=find_packages(),
-	install_requires=['dateutil','thumbor', 'boto>=2.6.0']
+	install_requires=['boto>=2.6.0'],
+	requires=['dateutil','thumbor']
 
 )

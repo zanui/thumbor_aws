@@ -11,7 +11,7 @@ setup(
 	zip_safe = False,
 	include_package_data = True,
 	packages=find_packages(),
-	requires=['dateutil','thumbor']
+	requires=['dateutil','thumbor'],
 	extras_require = {
         's3':  ["boto>=2.6.0"]
     }

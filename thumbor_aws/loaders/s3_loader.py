@@ -33,10 +33,13 @@ def _establish_connection(context_config):
     conn = connection
     if conn is None:
         # Store connection not bucket
-        conn = S3Connection(
-            context_config.AWS_ACCESS_KEY,
-            context_config.AWS_SECRET_KEY
-        )
+        if context_config.AWS_ACCESS_KEY and context_config.AWS_SECRET_KEY:
+            conn = S3Connection(
+                context_config.AWS_ACCESS_KEY,
+                context_config.AWS_SECRET_KEY
+            )
+        else:
+            conn = S3Connection()
 
     return conn
 

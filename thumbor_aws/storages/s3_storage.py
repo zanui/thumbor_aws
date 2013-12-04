@@ -24,7 +24,7 @@ class Storage(BaseStorage):
         self.storage = self.__get_s3_bucket()
 
     def __get_s3_connection(self):
-        if self.context_config.AWS_ACCESS_KEY and self.context_config.AWS_SECRET_KEY:
+        if self.context.AWS_ACCESS_KEY and self.context.AWS_SECRET_KEY:
             return S3Connection(
                 self.context.config.AWS_ACCESS_KEY,
                 self.context.config.AWS_SECRET_KEY

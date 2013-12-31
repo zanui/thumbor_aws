@@ -16,7 +16,7 @@ from dateutil.parser import parse as parse_ts
 class Storage(BaseStorage):
     @property
     def is_webp(self):
-        return self.is_auto_webp(self) or self.context.request.format == 'webp'
+        return self.is_auto_webp or self.context.request.format == 'webp'
 
     def is_auto_webp(self):
         return self.context.config.AUTO_WEBP and self.context.request.accepts_webp

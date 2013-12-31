@@ -15,6 +15,9 @@ from dateutil.parser import parse as parse_ts
 
 class Storage(BaseStorage):
     @property
+    def is_webp(self):
+        return is_auto_webp(self) or self.context.request.format == 'webp'
+
     def is_auto_webp(self):
         return self.context.config.AUTO_WEBP and self.context.request.accepts_webp
 
@@ -55,7 +58,7 @@ class Storage(BaseStorage):
 
     def normalize_path(self, path):
         digest = hashlib.sha1(path.encode('utf-8')).hexdigest()
-        if self.is_auto_webp:
+        if self.is_webp:
              return "thumbor/result_storage/webp/"+digest
         else:
              return "thumbor/result_storage/"+digest
